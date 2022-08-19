@@ -51,9 +51,53 @@ function PantallaInicial() {
     setStateEmoji(Qemojis[StateIndex])
     const timer = setTimeout(() => {
       // Reducir parámetros
+      if (StateIndex !== 9) {
+        setVida((Vida - 0.01).toFixed(3));
+        setEnergia(Energia - 0.1);
+        if (Felicidad >= 0.04) {
+          setFelicidad((Felicidad - 0.08).toFixed(2));
+        } else {setFelicidad(0);}
+        if (Felicidad >= 0.04) {setEntretenimiento((Entretenimiento - 0.06).toFixed(2));
+        } else {setEntretenimiento(0)}
+        setSalud((Salud - 0.04).toFixed(2));
+        setAlimentacion((Alimentación - 0.02).toFixed(2));
+
+        //CAMBIOS DE ESTADO POR PARAMETROS
+        
+        if (Energia < 0.75) {
+          setStateIndex(8);
+          setStateValue(Qvalues[StateIndex]);
+          setStateEmoji(Qemojis[StateIndex]);
+        }
+        if (Felicidad < 0.5) {
+          setStateIndex(3);
+          setStateValue(Qvalues[StateIndex]);
+          setStateEmoji(Qemojis[StateIndex]);
+        }
+        if (Entretenimiento < 0.35) {
+          setStateIndex(4);
+          setStateValue(Qvalues[StateIndex]);
+          setStateEmoji(Qemojis[StateIndex]);
+        }
+        if (Salud < 0.5) {
+          setStateIndex(5);
+          setStateValue(Qvalues[StateIndex]);
+          setStateEmoji(Qemojis[StateIndex]);
+        }
+        if (Alimentación < 0.5) {
+          setStateIndex(0);
+          setStateValue(Qvalues[StateIndex]);
+          setStateEmoji(Qemojis[StateIndex]);
+        }
+        
+      }
+      if (Vida < 0.100) {
+        setStateIndex(9);
+        setStateValue(Qvalues[StateIndex]);
+        setStateEmoji(Qemojis[StateIndex]);
+      }
       
-      
-    }, 100);
+    }, 2000);
     return () => {
       clearTimeout(timer);
     };
